@@ -1,4 +1,3 @@
-from location_codes import location_codes
 import re
 import numpy as np
 
@@ -12,7 +11,7 @@ class Extractor:
     def lower_columns(self, df, *columns):
         for i in columns:
             df[i] = df[i].astype(str).str.lower()
-    def extract1(self, df, column1, new_column):
+    def extract1(self, df, column1, new_column, location_codes):
         location_patterns = [re.escape(str(x).lower()) for x in location_codes]
     
         # Create regex pattern to match whole words or exact phrases
