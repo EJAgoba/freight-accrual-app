@@ -21,6 +21,10 @@ The tool will process them and give you the updated accrual file named for last 
 
 # Upload files
 location_file = st.file_uploader("Upload Location Excel File", type=["xlsx"])
+
+all_location_codes_df = pd.read_excel("all_location_codes.xlsx")
+location_codes = all_location_codes_df['Codes'].tolist()
+
 accrual_file = st.file_uploader("Upload Accrual Excel File", type=["xlsx"])
 
 if location_file and accrual_file:
@@ -33,8 +37,8 @@ if location_file and accrual_file:
         extractor = Extractor()
         extractor.create_columns(accrual_table)
         extractor.lower_columns(accrual_table, 'Consignor', 'Consignee')
-        extractor.extract1(accrual_table, 'Consignor', 'Consignor Code')
-        extractor.extract1(accrual_table, 'Consignee', 'Consignee Code')
+        extractor.extract1(accrual_table, 'Consignor', 'Consignor Code', location_codes)
+        extractor.extract1(accrual_table, 'Consignee', 'Consignee Code', location_codes)
 
         # Create Combined Address
         combined_address = CombinedAddress()
