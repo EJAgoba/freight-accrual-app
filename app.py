@@ -8,6 +8,7 @@ from address_crossref import Merger
 from clean_codes import CodeFormatter
 from map_types import TypeMapper, TypeCleaner
 from matrix_map import MatrixMapper
+from location_codes import location_codes
 
 # Set app title
 st.title("Freight Accrual Assignment Tool")
@@ -22,8 +23,8 @@ The tool will process them and give you the updated accrual file named for last 
 # Upload files
 location_file = st.file_uploader("Upload Location Excel File", type=["xlsx"])
 
-all_location_codes_df = pd.read_excel("all_location_codes.xlsx")
-location_codes = all_location_codes_df['Codes'].tolist()
+# all_location_codes_df = pd.read_excel("all_location_codes.xlsx")
+# location_codes = all_location_codes_df['Codes'].tolist()
 
 accrual_file = st.file_uploader("Upload Accrual Excel File", type=["xlsx"])
 
@@ -103,3 +104,4 @@ if location_file and accrual_file:
 
 else:
     st.info("Please upload both the location and accrual Excel files to proceed.")
+
